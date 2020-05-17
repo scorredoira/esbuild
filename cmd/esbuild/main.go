@@ -496,7 +496,7 @@ func main() {
 			}
 			defer func() {
 				f.Close()
-				fmt.Fprintf(os.Stderr, "Wrote to %s\n", args.traceFile)
+				//fmt.Fprintf(os.Stderr, "Wrote to %s\n", args.traceFile)
 			}()
 			trace.Start(f)
 			defer trace.Stop()
@@ -513,7 +513,7 @@ func main() {
 			}
 			defer func() {
 				f.Close()
-				fmt.Fprintf(os.Stderr, "Wrote to %s\n", args.cpuprofileFile)
+				//fmt.Fprintf(os.Stderr, "Wrote to %s\n", args.cpuprofileFile)
 			}()
 			pprof.StartCPUProfile(f)
 			defer pprof.StopCPUProfile()
@@ -533,9 +533,9 @@ func main() {
 		}
 	}()
 
-	if !args.bundleOptions.WriteToStdout {
-		fmt.Fprintf(os.Stderr, "Done in %dms\n", time.Since(start).Nanoseconds()/1000000)
-	}
+	// if !args.bundleOptions.WriteToStdout {
+	// 	fmt.Fprintf(os.Stderr, "Done in %dms\n", time.Since(start).Nanoseconds()/1000000)
+	// }
 }
 
 func run(fs fs.FS, args argsObject) {
@@ -582,9 +582,9 @@ func run(fs fs.FS, args argsObject) {
 		if err != nil {
 			exitWithError(fmt.Sprintf("Failed to write to %s (%s)", path, err.Error()))
 		}
-		if !args.bundleOptions.WriteToStdout {
-			fmt.Fprintf(os.Stderr, "Wrote to %s (%s)\n", path, toSize(len(item.JsContents)))
-		}
+		// if !args.bundleOptions.WriteToStdout {
+		// 	fmt.Fprintf(os.Stderr, "Wrote to %s (%s)\n", path, toSize(len(item.JsContents)))
+		// }
 
 		// Also write the source map
 		if item.SourceMapAbsPath != "" {
@@ -593,9 +593,9 @@ func run(fs fs.FS, args argsObject) {
 			if err != nil {
 				exitWithError(fmt.Sprintf("Failed to write to %s: (%s)", path, err.Error()))
 			}
-			if !args.bundleOptions.WriteToStdout {
-				fmt.Fprintf(os.Stderr, "Wrote to %s (%s)\n", path, toSize(len(item.SourceMapContents)))
-			}
+			// if !args.bundleOptions.WriteToStdout {
+			// 	fmt.Fprintf(os.Stderr, "Wrote to %s (%s)\n", path, toSize(len(item.SourceMapContents)))
+			// }
 		}
 	}
 }
